@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiroyuki Ando - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&family=Playfair+Display:wght@700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2235;
+            --bg-card-hover: #1f2a40;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #1e293b;
+            --glow-blue: rgba(59, 130, 246, 0.15);
+            --glow-cyan: rgba(6, 182, 212, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ===== Background Effects ===== */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -200px;
+            right: -100px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent);
+        }
+
+        .bg-glow-2 {
+            bottom: 20%;
+            left: -200px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.08), transparent);
+        }
+
+        /* ===== Layout ===== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 6px 20px;
+            border-radius: 100px;
+            margin-bottom: 32px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-link:hover {
+            color: var(--accent-cyan);
+            border-color: rgba(6, 182, 212, 0.4);
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        /* ===== Section ===== */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* ===== Project Cards ===== */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), 0 0 60px var(--glow-blue);
+            transform: translateY(-2px);
+        }
+
+        .project-badge-row {
+            padding: 24px 32px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .project-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-weight: 600;
+        }
+
+        .badge-main {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .badge-sub {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .badge-play {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+        }
+
+        .project-body {
+            padding: 20px 32px 32px;
+        }
+
+        .project-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .project-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            line-height: 1.9;
+        }
+
+        .project-screenshot {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            display: none; /* スクリーンショット追加時にblockに変更 */
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 240px;
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .feature-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-text {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .feature-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tech-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            color: var(--accent-cyan);
+        }
+
+        /* Project Links */
+        .project-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .link-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .link-primary:hover {
+            background: #2563eb;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .link-secondary {
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .link-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+
+        /* ===== Skills Section ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .skill-category {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-cyan);
+            margin-bottom: 12px;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== About Section ===== */
+        .about-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 2;
+        }
+
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-highlight {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* ===== Strengths Section ===== */
+        .strength-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .strength-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .strength-card:hover {
+            border-color: rgba(6, 182, 212, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .strength-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .strength-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .strength-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .strength-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .project-body {
+                padding: 16px 20px 24px;
+            }
+
+            .project-badge-row {
+                padding: 16px 20px 0;
+            }
+
+            .about-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-label">Portfolio</div>
+            <h1>Ando Hiroyuki</h1>
+            <p class="hero-subtitle">
+                ゲーム開発を通じてプログラミングを独学。企画・デザイン・実装を一人で完結させる開発者。
+            </p>
+            <div class="hero-links">
+                <a href="https://github.com/hiro0909yoshi" class="hero-link" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://atcoder.jp/users/hiro0909yoshi" class="hero-link" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v12H2V2zm1 1v10h10V3H3zm2 2h2v6H5V5zm4 0h2v6H9V5z"/></svg>
+                    AtCoder（茶色）
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">Projects</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Project 1: Card Battle Game -->
+            <div class="project-card fade-in">
+                <div class="project-badge-row">
+                    <span class="project-badge badge-main">Main Project</span>
+                    <span class="project-badge badge-play">▶ ブラウザでプレイ可能</span>
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">Card Battle Game</h3>
+                    <p class="project-subtitle">カルドセプト風 ボード×カードバトルゲーム</p>
+
+                    <!-- スクリーンショット（後から追加） -->
+                    <div class="screenshot-placeholder">
+                        📷 スクリーンショットは後日追加予定
+                    </div>
+                    <!-- <img src="images/game-screenshot.png" alt="Card Battle Game" class="project-screenshot"> -->
+
+                    <p class="project-description">
+                        3Dボードマップ上でクリーチャーを召喚し、カードバトルで領地を奪い合うターン制戦略ゲーム。
+                        150ファイル超の大規模設計を一人で行い、企画・デザイン・実装のすべてを完結させています。
+                    </p>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🤖</span>
+                            <div class="feature-text">
+                                <strong>CPU AI（28ファイル）</strong>
+                                戦闘・スペル・移動・領地の4種の意思決定ロジック
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚔️</span>
+                            <div class="feature-text">
+                                <strong>バトルシステム</strong>
+                                75種のアイテム、24種のスキル、先制攻撃・反撃処理
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <div class="feature-text">
+                                <strong>スペルシステム（26ファイル）</strong>
+                                ダメージ、呪い、ドロー、領地操作など全種実装
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🏗️</span>
+                            <div class="feature-text">
+                                <strong>設計パターン</strong>
+                                シグナル駆動、単一責任、データ一元管理
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">Godot 4.4.1</span>
+                        <span class="tech-tag">GDScript</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">JSON</span>
+                        <span class="tech-tag">Blender</span>
+                        <span class="tech-tag">Bash</span>
+                        <span class="tech-tag">Canva</span>
+                        <span class="tech-tag">Photopea</span>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://hiro0909yoshi.github.io/cardbattlegame/" class="project-link link-primary" target="_blank">
+                            ▶ ブラウザでプレイ
+                        </a>
+                        <a href="https://github.com/hiro0909yoshi/cardbattlegame" class="project-link link-secondary" target="_blank">
+                            ソースコード（GitHub）
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Study Notes -->
+            <div class="project-card fade-in">
+                <div class="project-badge-row">
+                    <span class="project-badge badge-sub">Learning Tool</span>
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">My Study Notes</h3>
+                    <p class="project-subtitle">AtCoder学習記録・ノート管理アプリ</p>
+
+                    <p class="project-description">
+                        AtCoderの学習過程で得た知識をジャンル別に整理・記録するWebアプリケーション。
+                        アルゴリズム、データ構造、言語機能など20カテゴリに分類し、
+                        コードハイライト付きで学習内容を管理できます。フレームワークを使わずバニラJavaScriptで実装。
+                    </p>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://hiro0909yoshi.github.io/stedy-log/" class="project-link link-primary" target="_blank">
+                            サイトを見る
+                        </a>
+                        <a href="https://github.com/hiro0909yoshi/stedy-log" class="project-link link-secondary" target="_blank">
+                            ソースコード（GitHub）
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Skills</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-grid fade-in">
+                <div class="skill-card">
+                    <div class="skill-category">Languages</div>
+                    <ul class="skill-list">
+                        <li>GDScript</li>
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>HTML / CSS</li>
+                        <li>SQL</li>
+                        <li>Bash</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-category">Tools & Engine</div>
+                    <ul class="skill-list">
+                        <li>Godot Engine 4.x</li>
+                        <li>Blender</li>
+                        <li>Git / GitHub</li>
+                        <li>SQLite</li>
+                        <li>Canva</li>
+                        <li>Photopea</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-category">Design & Architecture</div>
+                    <ul class="skill-list">
+                        <li>シグナル駆動設計</li>
+                        <li>単一責任の原則</li>
+                        <li>データ駆動設計</li>
+                        <li>AI意思決定ロジック</li>
+                        <li>3Dモデリング</li>
+                        <li>UIデザイン</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Strengths ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Strengths</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="strength-cards fade-in">
+                <div class="strength-card">
+                    <div class="strength-icon">🔥</div>
+                    <h3 class="strength-title">自律的な学習継続力</h3>
+                    <p class="strength-text">
+                        育休期間を活用し、毎日8時間の学習を欠かさず継続。
+                        AtCoderで茶色ランクを達成し、アルゴリズム的思考力を日々鍛えています。
+                    </p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">🏗️</div>
+                    <h3 class="strength-title">企画〜実装の完結力</h3>
+                    <p class="strength-text">
+                        150ファイル超の大規模ゲームを企画・デザイン・実装まで一人で完結。
+                        3Dモデリングからアセット制作、UI設計まで幅広く対応。
+                    </p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">👥</div>
+                    <h3 class="strength-title">チームマネジメント経験</h3>
+                    <p class="strength-text">
+                        前職の施工管理で最大10名規模のチームを半年間統率。
+                        多方面の関係者との折衝・調整を日常的に行ってきました。
+                    </p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">💪</div>
+                    <h3 class="strength-title">納期を守る責任感</h3>
+                    <p class="strength-text">
+                        施工管理で培った進捗管理能力と納期意識。
+                        家族を持つ覚悟のもと、本気でエンジニアへの転身に挑んでいます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">About</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="about-content fade-in">
+                <p>
+                    中学生時代からの夢であったエンジニアへの転身を決意。
+                    育休期間を活用して<span class="about-highlight">毎日8時間</span>の学習を継続し、
+                    ゲームエンジン（Godot 4.x）を用いたカードバトルゲームの個人開発に取り組んでいます。
+                </p>
+                <p>
+                    前職では施工管理としてJR関連の新線工事を担当。
+                    毎日10名規模の作業員への役割分担、親会社・中間会社との書類面での打ち合わせ、
+                    進捗管理といった業務を通じて、<span class="about-highlight">チームマネジメント力</span>と
+                    <span class="about-highlight">多方面との折衝力</span>を培いました。
+                </p>
+                <p>
+                    年齢を言い訳にせず、常に新しい技術をキャッチアップし続ける姿勢と、
+                    現場で鍛えられた「納期を守り切る責任感」を武器に、
+                    早期に戦力として貢献いたします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ando Hiroyuki. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
